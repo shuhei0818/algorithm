@@ -8,15 +8,25 @@ type Queue[T any] struct {
 	data []T
 }
 
-const size = 4
-const mask = size - 1
+func isPowerOfTwo(x int) bool {
+	if x == 0 {
+		return false
+	}
 
-func NewQueue[T any]() Queue[T] {
+	return x&(x-1) == 0
+}
+
+func NewQueue[T any](size int) (Queue[T], error) {
+	if !isPowerOfTwo(size) {
+		var zero = Queue[T]{}
+		return zero, errors.New("size must power of two")
+	}
+
 	return Queue[T]{
 		head: 0,
 		tail: 0,
 		data: make([]T, size),
-	}
+	}, nil
 }
 
 func (q *Queue[T]) Size() int {
@@ -24,7 +34,7 @@ func (q *Queue[T]) Size() int {
 }
 
 func (q *Queue[T]) IsFull() bool {
-	return q.head == (q.tail+1)&mask
+	return q.head == (q.tail+1)&(len(q.data)-1)
 }
 
 func (q *Queue[T]) Enqueue(d T) error {
@@ -34,7 +44,7 @@ func (q *Queue[T]) Enqueue(d T) error {
 
 	q.data[q.tail] = d
 
-	q.tail = q.tail + 1&mask
+	q.tail = q.tail + 1&(len(q.data)-1)
 
 	return nil
 }
@@ -47,7 +57,7 @@ func (q *Queue[T]) Dequeue() (T, error) {
 
 	result := q.data[q.head]
 
-	q.head = q.head + 1&mask
+	q.head = q.head + 1&(len(q.data)-1)
 
 	return result, nil
 }
