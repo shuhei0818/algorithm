@@ -18,7 +18,7 @@ func TestSuccess(t *testing.T) {
 	stack := algorithm.NewStack[string](10)
 	for _, c := range cases {
 		for _, v := range c.in {
-			stack.Push(v)
+			stack.Add(v)
 		}
 	}
 
@@ -26,7 +26,7 @@ func TestSuccess(t *testing.T) {
 		c := c
 		t.Run(name, func(t *testing.T) {
 			for _, v := range c.out {
-				r, err := stack.Pop()
+				r, err := stack.Get()
 
 				if err != nil {
 					t.Error("unexpected error")

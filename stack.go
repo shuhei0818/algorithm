@@ -7,6 +7,8 @@ type Stack[T any] struct {
 	array []T
 }
 
+var _ List[string] = (*Stack[string])(nil)
+
 func NewStack[T any](size int) Stack[T] {
 	s := Stack[T]{
 		top:   0,
@@ -15,7 +17,8 @@ func NewStack[T any](size int) Stack[T] {
 	return s
 }
 
-func (s *Stack[T]) Push(data T) error {
+// Add is Push.
+func (s *Stack[T]) Add(data T) error {
 	if s.top > len(s.array) {
 		return errors.New("stack overflow happend")
 	}
@@ -26,7 +29,8 @@ func (s *Stack[T]) Push(data T) error {
 	return nil
 }
 
-func (s *Stack[T]) Pop() (T, error) {
+// Get is Pop.
+func (s *Stack[T]) Get() (T, error) {
 
 	if s.top <= 0 {
 		var zero T
