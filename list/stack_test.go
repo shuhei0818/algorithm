@@ -1,9 +1,9 @@
-package algorithm_test
+package list_test
 
 import (
 	"testing"
 
-	"github.com/shuhei0818/algorithm"
+	"github.com/shuhei0818/algorithm/list"
 )
 
 func TestSuccess(t *testing.T) {
@@ -15,7 +15,7 @@ func TestSuccess(t *testing.T) {
 		"string": {in: []string{"1", "2", "3"}, out: []string{"3", "2", "1"}},
 	}
 
-	stack := algorithm.NewStack[string](10)
+	stack := list.NewStack[string](10)
 	for _, c := range cases {
 		for _, v := range c.in {
 			stack.Add(v)

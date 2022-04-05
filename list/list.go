@@ -1,4 +1,4 @@
-package algorithm
+package list
 
 type List[T any] interface {
 	Get() (T, error)
