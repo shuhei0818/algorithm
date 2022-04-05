@@ -10,6 +10,8 @@ type Queue[T any] struct {
 
 var _ List[string] = (*Queue[string])(nil)
 
+// NewQueue create instance.
+// The argument size must be a power of two.
 func NewQueue[T any](size int) (Queue[T], error) {
 	if !isPowerOfTwo(size) {
 		var zero = Queue[T]{}
