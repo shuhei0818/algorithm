@@ -7,7 +7,10 @@ import (
 )
 
 func main() {
-	s := list.NewStack[string](10)
+	s, err := list.NewQueue[string](10)
+	if err != nil {
+		panic(err)
+	}
 	s.Add("a")
 	s.Add("b")
 	s.Add("c")
